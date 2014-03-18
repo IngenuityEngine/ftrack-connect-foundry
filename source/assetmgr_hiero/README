@@ -1,0 +1,9 @@
+This module represents a proof-of-concept integration of the FnAssetAPI into
+the Heiro application.
+
+Ultimately, it should be integrated directly into the application SCM
+repository, and developed along-side the application.
+
+This integration provides the following events in order to help add
+functionality to a Manager's integration:
+
