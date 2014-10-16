@@ -1,0 +1,15 @@
+<RCC>
+    <qresource>
+        <file alias="banner-ftrack">ftrack_banner_grey.png</file>
+        <file alias="banner-ftrack-alt">ftrack_banner_grey_alt.png</file>
+        <file alias="icon-arrow-up">arrow_up.png</file>
+        <file alias="icon-box">box.png</file>
+        <file alias="icon-folder-open">folder_open.png</file>
+        <file alias="icon-ftrack-box">ftrack_logo_box.png</file>
+        <file alias="icon-home">home.png</file>
+        <file alias="icon-layers">layers.png</file>
+        <file alias="icon-movie">movie.png</file>
+        <file alias="icon-plus">plus.png</file>
+        <file alias="icon-signup">signup.png</file>
+    </qresource>
+</RCC>
