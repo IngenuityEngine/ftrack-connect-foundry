@@ -148,13 +148,15 @@ def __extendClipMenu(clipmenu):
 
 
 def __extendTimelineMenu(timelinemenu):
-
-  timelinemenu.addSeparator()
-  timelinemenu.addAction(__actions['generateShotsAction'])
-  timelinemenu.addAction(__actions['updateShotsAction'])
-  timelinemenu.addAction(__actions['publishShotClipsAction'])
-  timelinemenu.addSeparator()
-  timelinemenu.addAction(__actions['linkSequenceAction'])
+  if timelinemenu:
+    # TODO: timelinemenu is None in Nuke Studio - confirm bug with The Foundry
+    # and discuss correct approach.
+    timelinemenu.addSeparator()
+    timelinemenu.addAction(__actions['generateShotsAction'])
+    timelinemenu.addAction(__actions['updateShotsAction'])
+    timelinemenu.addAction(__actions['publishShotClipsAction'])
+    timelinemenu.addSeparator()
+    timelinemenu.addAction(__actions['linkSequenceAction'])
 
 
 def populateTimelineContextMenu(event):
