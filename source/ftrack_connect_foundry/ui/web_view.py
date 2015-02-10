@@ -56,7 +56,11 @@ class WebView(FnAssetAPI.ui.widgets.BaseWidget):
 
     def getUrl(self):
         '''Return current url.'''
-        return self._webView.url().toString()
+        url = self._webView.url().toString()
+        if url in ('about:blank', ):
+            return None
+
+        return url
 
     @classmethod
     def getAttributes(cls):
