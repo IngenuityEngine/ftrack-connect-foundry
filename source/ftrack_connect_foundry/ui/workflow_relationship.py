@@ -1,7 +1,7 @@
 # :coding: utf-8
 # :copyright: Copyright (c) 2014 ftrack
 
-from FnAssetAPI.ui.toolkit import QtGui
+from FnAssetAPI.ui.toolkit import QtGui, QtCore
 import FnAssetAPI
 import FnAssetAPI.ui.widgets
 
