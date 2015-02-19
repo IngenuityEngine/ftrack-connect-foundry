@@ -12,6 +12,18 @@ _uiComponents = {}
 _uiToRemove = []
 
 
+## Return init wrapping function for widget class.
+def getWrappedInitFn(widgetCls):
+
+  def initWrappingFn(*args, **kwargs ):
+    # We need to call configure after we construct it
+    widget = widgetCls(*args, **kwargs)
+    FnAssetAPI.ui.UISessionManager.currentSession().configureWidget(widget)
+    return widget
+
+  return initWrappingFn
+
+
 # Set up the UI elements that we always keep around even when there is no
 # manager
 def buildStaticUI():
@@ -51,14 +63,8 @@ def bootstrapManagerUI():
       widgetCls = session.getManagerWidget(identifier, instantiate=False)
       exposedClsName = identifier.replace(".", "_")
 
-      def initWrappingFn(*args, **kwargs ):
-        # We need to call configure after we construct it
-        widget = widgetCls(*args, **kwargs)
-        FnAssetAPI.ui.UISessionManager.currentSession().configureWidget(widget)
-        return widget
-
       # In nuke we need to leave the callable in an accessible namespace
-      globals()[exposedClsName] = initWrappingFn
+      globals()[exposedClsName] = getWrappedInitFn(widgetCls)
 
       nukescripts.panels.registerWidgetAsPanel(
           "%s.%s" % (__name__, exposedClsName),
