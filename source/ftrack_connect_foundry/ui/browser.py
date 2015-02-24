@@ -52,6 +52,7 @@ class BrowserDialog(FnAssetAPI.ui.dialogs.TabbedBrowserDialog):
 
     def _postBuild(self):
         '''Perform post build operations.'''
+        super(BrowserDialog, self)._postBuild()
 
 
 class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
@@ -92,9 +93,10 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         '''Build and layout widget.'''
         layout = QtGui.QVBoxLayout()
         self.setLayout(layout)
+        from ftrack_connect.ui.widget.header import HeaderWidget
 
         # Header
-        header = QtGui.QFrame()
+        header = HeaderWidget(self)
         header.setSizePolicy(
             QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Fixed
         )
