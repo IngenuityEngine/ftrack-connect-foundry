@@ -6,6 +6,7 @@ from __future__ import with_statement
 import os
 import traceback
 import functools
+import getpass
 
 from FnAssetAPI.ui.toolkit import QtCore, QtGui
 import FnAssetAPI.ui.widgets
@@ -14,6 +15,7 @@ import FnAssetAPI.specifications
 import FnAssetAPI.exceptions
 import FnAssetAPI.logging
 import ftrack
+import ftrack_connect.ui.widget.header
 
 import ftrack_connect_foundry.ui.detail_view
 
@@ -93,10 +95,9 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         '''Build and layout widget.'''
         layout = QtGui.QVBoxLayout()
         self.setLayout(layout)
-        from ftrack_connect.ui.widget.header import HeaderWidget
 
         # Header
-        header = HeaderWidget(self)
+        header = ftrack_connect.ui.widget.header.Header(getpass.getuser(), self)
         header.setSizePolicy(
             QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Fixed
         )
