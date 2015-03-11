@@ -59,37 +59,50 @@ class _WorkflowRelationshipWidget(QtGui.QWidget):
             rowCntr += 1
 
     def getCriteria(self):
-        return (
-            self.ui.versionCombo.itemData(self.ui.versionCombo.currentIndex())
-            + ','
-            + self.ui.taskCombo.itemData(self.ui.taskCombo.currentIndex())
+        '''Return workflow relationship criteria.'''
+        return '{0},{1},{2}'.format(
+            self.ui.versionCombo.itemData(self.ui.versionCombo.currentIndex()),
+            self.ui.taskCombo.itemData(self.ui.taskCombo.currentIndex()),
+            self.ui.preferNukeScript.isChecked()
         )
 
 
 class Ui_WorkflowRelationship(object):
+    '''Define ui for workflow relationship widget.'''
+
     def setupUi(self, WorkflowRelationship):
-        WorkflowRelationship.setObjectName("WorkflowRelationship")
+        '''Set up ui for *WorkflowRelationship* widget.'''
+        WorkflowRelationship.setObjectName('WorkflowRelationship')
         WorkflowRelationship.resize(275, 106)
         self.verticalLayout = QtGui.QVBoxLayout(WorkflowRelationship)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout.setObjectName('verticalLayout')
         self.gridLayout = QtGui.QGridLayout()
-        self.gridLayout.setObjectName("gridLayout")
-        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.gridLayout.setObjectName('gridLayout')
+        spacerItem = QtGui.QSpacerItem(
+            20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding
+        )
         self.gridLayout.addItem(spacerItem, 2, 0, 1, 1)
         self.label = QtGui.QLabel(WorkflowRelationship)
-        self.label.setObjectName("label")
+        self.label.setObjectName('label')
         self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
         self.taskCombo = QtGui.QComboBox(WorkflowRelationship)
-        self.taskCombo.setObjectName("taskCombo")
+        self.taskCombo.setObjectName('taskCombo')
         self.gridLayout.addWidget(self.taskCombo, 1, 1, 1, 1)
         self.versionCombo = QtGui.QComboBox(WorkflowRelationship)
-        self.versionCombo.setObjectName("versionCombo")
+        self.versionCombo.setObjectName('versionCombo')
         self.gridLayout.addWidget(self.versionCombo, 0, 1, 1, 1)
         self.label_2 = QtGui.QLabel(WorkflowRelationship)
-        self.label_2.setObjectName("label_2")
+        self.label_2.setObjectName('label_2')
         self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem1, 0, 2, 1, 1)
+        self.preferNukeScript = QtGui.QCheckBox(
+            'Prefer nuke script', WorkflowRelationship
+        )
+        self.gridLayout.addWidget(self.preferNukeScript, 2, 0, 1, 2)
+        spacerItem1 = QtGui.QSpacerItem(
+            40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum
+        )
+        self.gridLayout.addItem(spacerItem1, 0, 3, 1, 1)
+
         self.verticalLayout.addLayout(self.gridLayout)
 
         self.retranslateUi(WorkflowRelationship)

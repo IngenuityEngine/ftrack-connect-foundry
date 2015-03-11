@@ -303,9 +303,19 @@ class Bridge(object):
                 .format(specification)
             )
 
+        FnAssetAPI.logging.debug(
+            'Criterias raw: {0}'.format(criteria)
+        )
         splitCriteria = criteria.split(',')
         version = splitCriteria[0]
         taskType = self.getEntityById(splitCriteria[1])
+        prefeNukeScript = splitCriteria[2] == 'True'
+
+        FnAssetAPI.logging.debug(
+            'Criterias: version={0}, taskType={1}, prefeNukeScript={2}'.format(
+                version, taskType, prefeNukeScript
+            )
+        )
 
         if isinstance(entity, ftrack.Task):
             tasks = entity.getTasks(taskTypes=[taskType])
@@ -317,9 +327,10 @@ class Bridge(object):
         else:
             tasks = []
 
-        related = []
+        relatedClips = []
+        relatedNukeScripts = []
         for task in tasks:
-            assets = task.getAssets(assetTypes=['img'])
+            assets = task.getAssets(assetTypes=['img', 'comp'])
 
             for asset in assets:
                 assetVersions = asset.getVersions()
@@ -338,11 +349,18 @@ class Bridge(object):
                     components = targetVersion.getComponents()
 
                     for component in components:
+                        if component.get('filetype') == '.nk':
+                            relatedNukeScripts.append(component.getEntityRef())
+
+                    for component in components:
                         imgMain = component.getMeta('img_main')
                         if imgMain:
-                            related.append(component.getEntityRef())
+                            relatedClips.append(component.getEntityRef())
 
-        return related
+        if prefeNukeScript and relatedNukeScripts:
+            return relatedNukeScripts
+
+        return relatedClips
 
     def _getRelatedParentReferences(self, entity, specification, context,
                                     resultSpecification):
