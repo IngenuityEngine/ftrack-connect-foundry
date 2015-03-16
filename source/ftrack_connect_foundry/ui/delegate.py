@@ -57,6 +57,9 @@ class Delegate(FnAssetAPI.ui.implementation.ManagerUIDelegate):
 
     def getWidget(self, identifier):
         '''Return appropriate widget class for *identifier*.'''
+        if identifier == FnAssetAPI.ui.constants.kBrowserWidgetId:
+            return self._widgetMapping['uk.co.foundry.asset.api.ui.browser']
+
         return self._widgetMapping.get(identifier, None)
 
     def getWidgets(self, host):
