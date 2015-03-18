@@ -13,6 +13,7 @@ ftrack integration with The Foundry API.
     using/index
     developing/index
     glossary
+    release/index
 
 ******************
 Indices and tables

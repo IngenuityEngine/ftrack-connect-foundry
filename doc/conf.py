@@ -1,21 +1,21 @@
 # :coding: utf-8
-# :copyright: Copyright (c) 2013 ftrack
+# :copyright: Copyright (c) 2015 ftrack
 
-'''ftrack connect The Foundry documentation build configuration file'''
+'''ftrack-connect-foundry documentation build configuration file.'''
 
 import os
 import re
 
-import sphinx_rtd_theme
-
 # -- General ------------------------------------------------------------------
 
-# Extensions
+# Extensions.
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',
+    'sphinx.ext.todo',
     'sphinx.ext.viewcode',
+    'lowdown'
 ]
 
 # The suffix of source filenames.
@@ -29,10 +29,14 @@ project = u'ftrack connect The Foundry'
 copyright = u'2013, ftrack'
 
 # Version
-_setup_path = os.path.join(os.path.dirname(__file__), '..', 'setup.py')
-with open(_setup_path) as _setup_file:
+with open(
+    os.path.join(
+        os.path.dirname(__file__), '..', 'source',
+        'ftrack_connect_foundry', '_version.py'
+    )
+) as _version_file:
     _version = re.match(
-        r'.*version=\'(.*?)\'', _setup_file.read(), re.DOTALL
+        r'.*__version__ = \'(.*?)\'', _version_file.read(), re.DOTALL
     ).group(1)
 
 version = _version
@@ -40,28 +44,31 @@ release = _version
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_template', '_theme']
+exclude_patterns = ['_template']
 
-# A list of prefixes to ignore for module listings
-modindex_common_prefix = ['ftrack_connect_foundry.']
-
+# A list of prefixes to ignore for module listings.
+modindex_common_prefix = [
+    'ftrack_connect_foundry.'
+]
 
 # -- HTML output --------------------------------------------------------------
 
-html_theme = 'sphinx_rtd_theme'
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+# on_rtd is whether currently on readthedocs.org
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
-html_theme_options = {
-    'sticky_navigation': True,
-}
+if not on_rtd:  # only import and set the theme if building docs locally
+    import sphinx_rtd_theme
+    html_theme = 'sphinx_rtd_theme'
+    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+html_static_path = ['_static']
 
 # If True, copy source rst files to output for reference.
 html_copy_source = True
 
-
 # -- Autodoc ------------------------------------------------------------------
 
-autodoc_default_flags = ['members', 'undoc-members', 'show-inheritance']
+autodoc_default_flags = ['members', 'undoc-members']
 autodoc_member_order = 'bysource'
 
 def autodoc_skip(app, what, name, obj, skip, options):
@@ -71,11 +78,19 @@ def autodoc_skip(app, what, name, obj, skip, options):
 
     return skip
 
-
 # -- Intersphinx --------------------------------------------------------------
 
-intersphinx_mapping = {'python': ('http://docs.python.org/', None)}
+intersphinx_mapping = {
+    'python': ('http://docs.python.org/', None),
+    'ftrack': ('http://rtd.ftrack.com/docs/ftrack/en/latest/', None),
+    'ftrack-connect': (
+        'http://rtd.ftrack.com/docs/ftrack-connect/en/latest/', None
+    )
+}
 
+# -- Todos ---------------------------------------------------------------------
+
+todo_include_todos = True
 
 # -- Setup --------------------------------------------------------------------
 
