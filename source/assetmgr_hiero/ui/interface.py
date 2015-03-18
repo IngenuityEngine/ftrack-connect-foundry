@@ -105,7 +105,8 @@ def buildStaticUI():
   timelinemenuaction = hiero.ui.findMenuAction("Timeline")
   if timelinemenuaction:
     timelinemenu = timelinemenuaction.menu()
-    __extendTimelineMenu(timelinemenu)
+    if timelinemenu:
+      __extendTimelineMenu(timelinemenu)
 
 
 def _addAssetMenuItems(menu):
