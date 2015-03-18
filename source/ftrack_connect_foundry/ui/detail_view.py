@@ -93,7 +93,7 @@ class DetailView(QtGui.QWidget):
             version = str(assetVersion.getVersion())
             comment = assetVersion.getComment()
             date = str(assetVersion.getDate())
-            author = str(authorUser.getName().encode('ascii', 'replace'))
+            author = authorUser.getName().encode('utf-8')
 
             self._propertyTable.setRowHidden(1, False)
             self._propertyTable.setRowHidden(2, False)
