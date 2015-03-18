@@ -103,9 +103,11 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         )
         layout.addWidget(header)
 
+        secondaryHeader = QtGui.QFrame()
         headerLayout = QtGui.QHBoxLayout()
         headerLayout.setContentsMargins(0, 0, 0, 0)
-        header.setLayout(headerLayout)
+        secondaryHeader.setLayout(headerLayout)
+        layout.addWidget(secondaryHeader)
 
         self._createButton = QtGui.QToolButton()
         self._createButton.setIcon(
@@ -120,13 +122,6 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         headerLayout.addWidget(self._navigateUpButton)
 
         headerLayout.addStretch(1)
-
-        logo = QtGui.QPixmap(':banner-ftrack').scaledToHeight(
-            25, QtCore.Qt.SmoothTransformation
-        )
-        logoLabel = QtGui.QLabel()
-        logoLabel.setPixmap(logo)
-        headerLayout.addWidget(logoLabel)
 
         # Bookmarks
         contentSplitter = QtGui.QSplitter()
