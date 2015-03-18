@@ -6,6 +6,7 @@ from __future__ import with_statement
 import os
 import traceback
 import functools
+import getpass
 
 from FnAssetAPI.ui.toolkit import QtCore, QtGui
 import FnAssetAPI.ui.widgets
@@ -14,6 +15,7 @@ import FnAssetAPI.specifications
 import FnAssetAPI.exceptions
 import FnAssetAPI.logging
 import ftrack
+import ftrack_connect.ui.widget.header
 
 import ftrack_connect_foundry.ui.detail_view
 
@@ -52,6 +54,7 @@ class BrowserDialog(FnAssetAPI.ui.dialogs.TabbedBrowserDialog):
 
     def _postBuild(self):
         '''Perform post build operations.'''
+        super(BrowserDialog, self)._postBuild()
 
 
 class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
@@ -94,7 +97,7 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         self.setLayout(layout)
 
         # Header
-        header = QtGui.QFrame()
+        header = ftrack_connect.ui.widget.header.Header(getpass.getuser(), self)
         header.setSizePolicy(
             QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Fixed
         )
