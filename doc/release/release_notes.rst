@@ -8,6 +8,13 @@
 Release notes
 *************
 
+.. release:: next
+
+    .. change:: new
+        :tags: Build track, User interface
+
+        Added checkbox to build track from nuke scripts.
+
 .. release:: 0.1.0
     :date: 2015-03-18
 
