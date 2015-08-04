@@ -111,14 +111,17 @@ class DetailView(QtGui.QWidget):
             if hasattr(entity, 'getThumbnail'):
                 thumbnailUrl = entity.getThumbnail()
 
-            if hasattr(entity, 'getPriority'):
-                status = entity.getStatus().getName()
-                priority = entity.getPriority().getName()
+            statusName = ''
+            if hasattr(entity, 'getStatus'):
+                status = entity.getStatus()
+                if status:
+                    statusName = status.getName()
 
-            else:
-                # Assume is a project.
-                status = ''
-                priority = ''
+            priorityName = ''
+            if hasattr(entity, 'getPriority'):
+                priority = entity.getPriority()
+                if priority:
+                    priorityName = priority.getName()
 
             self._propertyTable.setRowHidden(1, True)
             self._propertyTable.setRowHidden(2, True)
@@ -127,8 +130,12 @@ class DetailView(QtGui.QWidget):
             self._propertyTable.setRowHidden(5, False)
             self._propertyTable.setRowHidden(6, False)
 
-            self._propertyTable.setItem(0, 5, QtGui.QTableWidgetItem(status))
-            self._propertyTable.setItem(0, 6, QtGui.QTableWidgetItem(priority))
+            self._propertyTable.setItem(
+                0, 5, QtGui.QTableWidgetItem(statusName)
+            )
+            self._propertyTable.setItem(
+                0, 6, QtGui.QTableWidgetItem(priorityName)
+            )
 
         if not thumbnailUrl:
             thumbnailUrl = self._placholderThumbnail
