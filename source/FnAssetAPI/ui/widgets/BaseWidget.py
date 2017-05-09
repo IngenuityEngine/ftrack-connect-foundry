@@ -1,10 +1,10 @@
-from ...ui.toolkit import QtGui
+from ...ui.toolkit import QtWidgets
 
 
 __all__ = ['BaseWidget']
 
 
-class BaseWidget(QtGui.QFrame):
+class BaseWidget(QtWidgets.QFrame):
   """
 
   A backing for all QWidget based widgets within the Asset API.
