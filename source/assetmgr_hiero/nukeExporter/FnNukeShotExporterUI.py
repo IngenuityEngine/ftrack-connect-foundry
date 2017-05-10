@@ -1,7 +1,7 @@
 # Copyright (c) 2011 The Foundry Visionmongers Ltd.  All Rights Reserved.
 
-import PySide.QtCore
-import PySide.QtGui
+from QtExt import QtCore, QtWidgets, QtGui
+
 import hiero.ui
 
 from hiero.exporters import FnNukeShotExporter
@@ -39,7 +39,7 @@ class NukeShotExporterUI(hiero.ui.TaskUIBase):
     model = self._readModel
     for row in range(0, model.rowCount()):
       item = model.item(row, 0)
-      if item.data(PySide.QtCore.Qt.CheckStateRole) == PySide.QtCore.Qt.Checked:
+      if item.data(QtCore.Qt.CheckStateRole) == QtCore.Qt.Checked:
         presetValue.append(item.text())
         element = self._exportTemplate.childElement(item.text())
         if element is not None:
@@ -47,8 +47,8 @@ class NukeShotExporterUI(hiero.ui.TaskUIBase):
 
 
     if len(presetValue) > 0:
-      if self._collateTimeProperty._widget.checkState() == PySide.QtCore.Qt.Checked or self._collateNameProperty._widget.checkState() == PySide.QtCore.Qt.Checked:
-        PySide.QtGui.QMessageBox.information(hiero.ui.mainWindow(), "Conflicting Options", "Overriding the Read node paths will disable the 'Collate' options. Currently these features are incompatible.")
+      if self._collateTimeProperty._widget.checkState() == QtCore.Qt.Checked or self._collateNameProperty._widget.checkState() == QtCore.Qt.Checked:
+        QtWidgets.QMessageBox.information(hiero.ui.mainWindow(), "Conflicting Options", "Overriding the Read node paths will disable the 'Collate' options. Currently these features are incompatible.")
         self._collateTimeProperty._widget.setChecked(False)
         self._collateNameProperty._widget.setChecked(False)
 
@@ -64,7 +64,7 @@ class NukeShotExporterUI(hiero.ui.TaskUIBase):
     model = self._writeModel
     for row in range(0, model.rowCount()):
       item = model.item(row, 0)
-      if item.data(PySide.QtCore.Qt.CheckStateRole) == PySide.QtCore.Qt.Checked:
+      if item.data(QtCore.Qt.CheckStateRole) == QtCore.Qt.Checked:
         presetValue.append(item.text())
         element = self._exportTemplate.childElement(item.text())
         if element is not None:
@@ -79,10 +79,10 @@ class NukeShotExporterUI(hiero.ui.TaskUIBase):
 
       properties = self._preset.properties()
 
-      layout = PySide.QtGui.QFormLayout()
+      layout = QtWidgets.QFormLayout()
 
-      self._readList = PySide.QtGui.QListView()
-      self._writeList = PySide.QtGui.QListView()
+      self._readList = QtWidgets.QListView()
+      self._writeList = QtWidgets.QListView()
 
       self._readList.setMinimumHeight(50)
       self._writeList.setMinimumHeight(50)
@@ -90,8 +90,8 @@ class NukeShotExporterUI(hiero.ui.TaskUIBase):
       self._writeList.resize(200,50)
 
 
-      self._readModel = PySide.QtGui.QStandardItemModel()
-      self._writeModel = PySide.QtGui.QStandardItemModel()
+      self._readModel = QtWidgets.QStandardItemModel()
+      self._writeModel = QtWidgets.QStandardItemModel()
 
       # Default to the empty item unless the preset has a value set.
       for model, presetValue in ((self._readModel, properties["readPaths"]), (self._writeModel, properties["writePaths"])):
@@ -101,12 +101,12 @@ class NukeShotExporterUI(hiero.ui.TaskUIBase):
             if not hasattr(preset._parentType, 'nukeWriteNode'):
               continue
 
-          item = PySide.QtGui.QStandardItem(path)
-          item.setFlags(PySide.QtCore.Qt.ItemIsUserCheckable | PySide.QtCore.Qt.ItemIsEnabled)
+          item = QtWidgets.QStandardItem(path)
+          item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
 
-          item.setData(PySide.QtCore.Qt.Unchecked, PySide.QtCore.Qt.CheckStateRole)
+          item.setData(QtCore.Qt.Unchecked, QtCore.Qt.CheckStateRole)
           if path in presetValue:
-            item.setData(PySide.QtCore.Qt.Checked, PySide.QtCore.Qt.CheckStateRole)
+            item.setData(QtCore.Qt.Checked, QtCore.Qt.CheckStateRole)
 
           model.appendRow(item)
 
@@ -163,13 +163,13 @@ class NukeShotExporterUI(hiero.ui.TaskUIBase):
 
       additionalNodesToolTip = """When enabled, allows custom Nuke nodes to be added into Nuke Scripts.\n Click Edit to add nodes on a per Shot, Track or Sequence basis.\n Additional Nodes can also optionally be filtered by Tag."""
 
-      additionalNodesLayout = PySide.QtGui.QHBoxLayout()
-      additionalNodesCheckbox = PySide.QtGui.QCheckBox()
+      additionalNodesLayout = QtWidgets.QHBoxLayout()
+      additionalNodesCheckbox = QtWidgets.QCheckBox()
       additionalNodesCheckbox.setToolTip(additionalNodesToolTip)
       additionalNodesCheckbox.stateChanged.connect(self._additionalNodesEnableClicked)
       if self._preset.properties()["additionalNodesEnabled"]:
-        additionalNodesCheckbox.setCheckState(PySide.QtCore.Qt.Checked)
-      additionalNodesButton = PySide.QtGui.QPushButton("Edit")
+        additionalNodesCheckbox.setCheckState(QtCore.Qt.Checked)
+      additionalNodesButton = QtWidgets.QPushButton("Edit")
       additionalNodesButton.setToolTip(additionalNodesToolTip)
       additionalNodesButton.clicked.connect(self._additionalNodesEditClicked)
       additionalNodesLayout.addWidget(additionalNodesCheckbox)
@@ -180,7 +180,7 @@ class NukeShotExporterUI(hiero.ui.TaskUIBase):
 
 
   def _additionalNodesEnableClicked(self, state):
-    self._preset.properties()["additionalNodesEnabled"] = state == PySide.QtCore.Qt.Checked
+    self._preset.properties()["additionalNodesEnabled"] = state == QtCore.Qt.Checked
     pass
 
   def _additionalNodesEditClicked(self):

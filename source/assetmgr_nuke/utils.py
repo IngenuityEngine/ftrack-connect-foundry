@@ -1,4 +1,4 @@
-from PySide import QtCore
+from QtExt import QtCore
 import FnAssetAPI
 import nuke
 

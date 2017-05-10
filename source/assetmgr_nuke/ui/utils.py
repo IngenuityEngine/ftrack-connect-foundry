@@ -1,4 +1,4 @@
-from PySide import QtGui
+from QtExt import QtGui, QtWidgets
 
 import FnAssetAPI
 
@@ -20,16 +20,16 @@ def confirmClose():
 
   l = FnAssetAPI.l
 
-  msgBox = QtGui.QMessageBox()
+  msgBox = QtWidgets.QMessageBox()
   msgBox.setText(l("Save changes before closing script?"))
-  msgBox.setStandardButtons(QtGui.QMessageBox.Save | QtGui.QMessageBox.Discard
-      | QtGui.QMessageBox.Cancel)
+  msgBox.setStandardButtons(QtWidgets.QMessageBox.Save | QtWidgets.QMessageBox.Discard
+      | QtWidgets.QMessageBox.Cancel)
 
   button = msgBox.exec_()
 
-  if button == QtGui.QMessageBox.Save:
+  if button == QtWidgets.QMessageBox.Save:
     return 'save'
-  elif button == QtGui.QMessageBox.Discard:
+  elif button == QtWidgets.QMessageBox.Discard:
     return 'dontsave'
   else:
     return 'cancel'
