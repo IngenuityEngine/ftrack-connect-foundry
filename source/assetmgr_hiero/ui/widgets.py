@@ -1,4 +1,4 @@
-from PySide import QtCore, QtGui
+from QtExt import QtGui, QtWidgets, QtCore
 
 from FnAssetAPI.ui.widgets import SessionSettingsWidget, ItemSpreadsheetWidget
 

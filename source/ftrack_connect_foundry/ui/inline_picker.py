@@ -3,7 +3,7 @@
 
 import traceback
 
-from FnAssetAPI.ui.toolkit import QtCore, QtGui
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWidgets
 import FnAssetAPI.exceptions
 import FnAssetAPI.logging
 import FnAssetAPI.ui.widgets
@@ -29,27 +29,27 @@ class InlinePicker(FnAssetAPI.ui.widgets.InlinePickerWidget):
 
     def _build(self):
         '''Build and layout widget.'''
-        layout = QtGui.QHBoxLayout()
+        layout = QtWidgets.QHBoxLayout()
         self.setLayout(layout)
 
-        icon = QtGui.QPixmap(':icon-ftrack-box')
+        icon = QtWidgets.QPixmap(':icon-ftrack-box')
         smallIcon = icon.scaled(
             QtCore.QSize(24, 24),
             QtCore.Qt.KeepAspectRatio,
             QtCore.Qt.SmoothTransformation
         )
 
-        iconLabel = QtGui.QLabel()
+        iconLabel = QtWidgets.QLabel()
         iconLabel.setPixmap(smallIcon)
         layout.addWidget(iconLabel)
 
-        self._label = QtGui.QLabel(self._noSelectionMessage)
+        self._label = QtWidgets.QLabel(self._noSelectionMessage)
         self._label.setEnabled(False)
         layout.addWidget(self._label)
 
         layout.addStretch()
 
-        self._browseButton = QtGui.QPushButton('Browse...')
+        self._browseButton = QtWidgets.QPushButton('Browse...')
         layout.addWidget(self._browseButton)
 
     def _postBuild(self):

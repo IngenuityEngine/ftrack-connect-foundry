@@ -7,8 +7,10 @@ import FnAssetAPI.ui.implementation
 import FnAssetAPI.ui.constants
 import FnAssetAPI.ui
 
-import ftrack_connect_foundry.ui.tasks_view
-import ftrack_connect_foundry.ui.info_view
+# TODO: RE ENABLE ONCE QtWebKitWidgets IS AVAILABLE
+
+# import ftrack_connect_foundry.ui.tasks_view
+# import ftrack_connect_foundry.ui.info_view
 import ftrack_connect_foundry.ui.browser
 import ftrack_connect_foundry.ui.inline_picker
 import ftrack_connect_foundry.ui.workflow_relationship
@@ -32,9 +34,12 @@ class Delegate(FnAssetAPI.ui.implementation.ManagerUIDelegate):
         # compatibility with their parent class interfaces.
         self._widgetMapping = {}
         for widgetClass in (
-            ftrack_connect_foundry.ui.info_view.InfoView,
-            ftrack_connect_foundry.ui.info_view.WorkingTaskInfoView,
-            ftrack_connect_foundry.ui.tasks_view.TasksView,
+
+            # TODO: RE ENABLE ONCE QtWebKitWidgets IS AVAILABLE
+
+            # ftrack_connect_foundry.ui.info_view.InfoView,
+            # ftrack_connect_foundry.ui.tasks_view.TasksView,
+            # ftrack_connect_foundry.ui.info_view.WorkingTaskInfoView,
             ftrack_connect_foundry.ui.browser.Browser,
             ftrack_connect_foundry.ui.inline_picker.InlinePicker,
             ftrack_connect_foundry.ui.workflow_relationship.WorkflowRelationship,

@@ -75,7 +75,7 @@ class QtHost(Host):
 
     """
 
-    from ui.toolkit import QtGui
+    from ui.toolkit import QtGui, QtWidgets
 
     title = logging.kSeverityNames[severity]
     title.capitalize()
@@ -86,7 +86,7 @@ class QtHost(Host):
       logging.kWarning : QtGui.QMessageBox.warning
     }
 
-    box = handlers.get(severity, QtGui.QMessageBox.information)
+    box = handlers.get(severity, QtWidgets.QMessageBox.information)
     box(self.mainWindow(), title, str(message))
 
 
@@ -103,7 +103,7 @@ class QtHost(Host):
 
     if self.inUI():
 
-      from ui.toolkit import QtGui
+      from ui.toolkit import QtGui, QtWidgets
 
       if decimalProgress < 0:
         if self._progressDialog:
@@ -120,7 +120,7 @@ class QtHost(Host):
       if message is not None:
         self._progressDialog.setLabelText(message)
       self._progressDialog.setValue(decimalProgress*100)
-      QtGui.QApplication.instance().processEvents()
+      QtWidgets.QApplication.instance().processEvents()
 
       if decimalProgress > 1:
         # The dialog should have closed itself based on the above
@@ -140,15 +140,15 @@ class QtHost(Host):
 
   def _initProgress(self):
 
-    from ui.toolkit import QtGui
+    from ui.toolkit import QtWidgets
 
-    progressDialog = QtGui.QProgressDialog(self.mainWindow())
+    progressDialog = QtWidgets.QProgressDialog(self.mainWindow())
     progressDialog.setRange(0, 100)
     progressDialog.setWindowTitle("Progress")
     progressDialog.setMinimumWidth(230)
     progressDialog.setModal(True)
 
-    label = QtGui.QLabel()
+    label = QtWidgets.QLabel()
     progressDialog.setLabel(label)
 
     self._progressDialog = progressDialog

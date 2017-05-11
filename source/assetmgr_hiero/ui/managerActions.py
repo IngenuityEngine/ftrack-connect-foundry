@@ -1,5 +1,5 @@
 import FnAssetAPI
-from PySide import QtGui
+from QtExt import QtGui, QtWidgets, QtCore
 
 
 __all__ = ['ManagerLocalisedAction', 'ManagerPolicyDependentAction']

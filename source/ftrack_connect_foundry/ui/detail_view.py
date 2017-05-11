@@ -4,11 +4,11 @@
 import os
 import urllib2
 
-from FnAssetAPI.ui.toolkit import QtCore, QtGui
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWidgets
 import ftrack
 
 
-class DetailView(QtGui.QWidget):
+class DetailView(QtWidgets.QWidget):
     '''Display detailed information for an entity.'''
 
     def __init__(self, bridge, parent=None):
@@ -19,7 +19,7 @@ class DetailView(QtGui.QWidget):
 
         '''
         self._bridge = bridge
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
 
         self._placholderThumbnail = (
             os.environ['FTRACK_SERVER'] + '/img/thumbnail2.png'
@@ -31,21 +31,21 @@ class DetailView(QtGui.QWidget):
 
     def _build(self):
         '''Create and layout widget.'''
-        layout = QtGui.QVBoxLayout(self)
+        layout = QtWidgets.QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         self.setLayout(layout)
 
         # Thumbnail.
-        self._thumbnail = QtGui.QLabel()
-        self._thumbnail.setFrameStyle(QtGui.QFrame.StyledPanel)
+        self._thumbnail = QtWidgets.QLabel()
+        self._thumbnail.setFrameStyle(QtWidgets.QFrame.StyledPanel)
         self._thumbnail.setAlignment(QtCore.Qt.AlignCenter)
         self._thumbnail.setFixedHeight(160)
         layout.addWidget(self._thumbnail)
 
         # Properties.
-        self._propertyTable = QtGui.QTableWidget()
+        self._propertyTable = QtWidgets.QTableWidget()
         self._propertyTable.setHorizontalScrollMode(
-            QtGui.QAbstractItemView.ScrollPerPixel
+            QtWidgets.QAbstractItemView.ScrollPerPixel
         )
         self._propertyTable.setColumnCount(1)
 
@@ -57,10 +57,10 @@ class DetailView(QtGui.QWidget):
 
         horizontalHeader = self._propertyTable.horizontalHeader()
         horizontalHeader.hide()
-        horizontalHeader.setResizeMode(QtGui.QHeaderView.Stretch)
+        horizontalHeader.setResizeMode(QtWidgets.QHeaderView.Stretch)
 
         verticalHeader = self._propertyTable.verticalHeader()
-        verticalHeader.setResizeMode(QtGui.QHeaderView.ResizeToContents)
+        verticalHeader.setResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
         layout.addWidget(self._propertyTable)
 
@@ -74,7 +74,7 @@ class DetailView(QtGui.QWidget):
         entity = self._bridge.getEntityById(identifier)
 
         name = self._bridge.getEntityName(entity.getEntityRef())
-        self._propertyTable.setItem(0, 0, QtGui.QTableWidgetItem(name))
+        self._propertyTable.setItem(0, 0, QtWidgets.QTableWidgetItem(name))
 
         assetVersion = None
         thumbnailUrl = None
@@ -102,10 +102,10 @@ class DetailView(QtGui.QWidget):
             self._propertyTable.setRowHidden(5, True)
             self._propertyTable.setRowHidden(6, True)
 
-            self._propertyTable.setItem(0, 1, QtGui.QTableWidgetItem(author))
-            self._propertyTable.setItem(0, 3, QtGui.QTableWidgetItem(date))
-            self._propertyTable.setItem(0, 2, QtGui.QTableWidgetItem(version))
-            self._propertyTable.setItem(0, 4, QtGui.QTableWidgetItem(comment))
+            self._propertyTable.setItem(0, 1, QtWidgets.QTableWidgetItem(author))
+            self._propertyTable.setItem(0, 3, QtWidgets.QTableWidgetItem(date))
+            self._propertyTable.setItem(0, 2, QtWidgets.QTableWidgetItem(version))
+            self._propertyTable.setItem(0, 4, QtWidgets.QTableWidgetItem(comment))
 
         else:
             if hasattr(entity, 'getThumbnail'):
@@ -131,10 +131,10 @@ class DetailView(QtGui.QWidget):
             self._propertyTable.setRowHidden(6, False)
 
             self._propertyTable.setItem(
-                0, 5, QtGui.QTableWidgetItem(statusName)
+                0, 5, QtWidgets.QTableWidgetItem(statusName)
             )
             self._propertyTable.setItem(
-                0, 6, QtGui.QTableWidgetItem(priorityName)
+                0, 6, QtWidgets.QTableWidgetItem(priorityName)
             )
 
         if not thumbnailUrl:

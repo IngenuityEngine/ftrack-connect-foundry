@@ -1,4 +1,4 @@
-from PySide import QtGui
+from QtExt import QtGui, QtWidgets, QtCore
 
 import hiero.core
 import hiero.ui

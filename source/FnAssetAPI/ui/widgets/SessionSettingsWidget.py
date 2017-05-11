@@ -1,11 +1,11 @@
-from ..toolkit import QtCore, QtGui
+from ..toolkit import QtCore, QtGui, QtWidgets
 from ... import logging
 
 
 __all__ = [ 'SessionSettingsWidget' ]
 
 
-class SessionSettingsWidget(QtGui.QWidget):
+class SessionSettingsWidget(QtWidgets.QWidget):
   """
 
   The SessionSettingsWidget is a convenience widget for Host applications to
@@ -30,7 +30,7 @@ class SessionSettingsWidget(QtGui.QWidget):
 
     self._session = None
 
-    layout = QtGui.QVBoxLayout()
+    layout = QtWidgets.QVBoxLayout()
     self.setLayout(layout)
     self._buildUI(layout)
 
@@ -40,8 +40,8 @@ class SessionSettingsWidget(QtGui.QWidget):
 
   def _buildUI(self, layout):
 
-    managerHBox = QtGui.QHBoxLayout()
-    managerHBox.addWidget(QtGui.QLabel("Manager:"))
+    managerHBox = QtWidgets.QHBoxLayout()
+    managerHBox.addWidget(QtWidgets.QLabel("Manager:"))
     self._managerSelector = ManagerSelectorWidget()
     managerHBox.addWidget(self._managerSelector)
     layout.addLayout(managerHBox)
@@ -51,13 +51,13 @@ class SessionSettingsWidget(QtGui.QWidget):
 
     layout.addStretch()
 
-    loggingHBox = QtGui.QHBoxLayout()
-    loggingHBox.addWidget(QtGui.QLabel("Logging:"))
+    loggingHBox = QtWidgets.QHBoxLayout()
+    loggingHBox.addWidget(QtWidgets.QLabel("Logging:"))
     self._loggingSelector = LoggingLevelWidget()
     loggingHBox.addWidget(self._loggingSelector)
     layout.addLayout(loggingHBox)
 
-    self._currentManager = QtGui.QLabel()
+    self._currentManager = QtWidgets.QLabel()
     layout.addWidget(self._currentManager)
 
 
@@ -123,7 +123,7 @@ class SessionSettingsWidget(QtGui.QWidget):
     self._loggingSelector.setSeverityIndex(logging.displaySeverity)
 
 
-class LoggingLevelWidget(QtGui.QComboBox):
+class LoggingLevelWidget(QtWidgets.QComboBox):
 
   def __init__(self, parent=None):
     super(LoggingLevelWidget, self).__init__(parent=parent)
@@ -146,7 +146,7 @@ class LoggingLevelWidget(QtGui.QComboBox):
     return logging.kSeverityNames[self.getSeverityIndex()]
 
 
-class ManagerSettingsWidget(QtGui.QWidget):
+class ManagerSettingsWidget(QtWidgets.QWidget):
 
   settingsChanged = QtCore.Signal()
   ## @see __managerChanged - but its important to note that the manager
@@ -156,7 +156,7 @@ class ManagerSettingsWidget(QtGui.QWidget):
   def __init__(self, manager=None, parent=None):
     super(ManagerSettingsWidget, self).__init__(parent=parent)
 
-    self._layout = QtGui.QGridLayout()
+    self._layout = QtWidgets.QGridLayout()
     self.setLayout(self._layout)
 
     self.setManager(manager)
@@ -170,7 +170,7 @@ class ManagerSettingsWidget(QtGui.QWidget):
     return {}
 
 
-class ManagerSelectorWidget(QtGui.QComboBox):
+class ManagerSelectorWidget(QtWidgets.QComboBox):
 
   sessionChanged = QtCore.Signal(object)
   managerChanged = QtCore.Signal(object)

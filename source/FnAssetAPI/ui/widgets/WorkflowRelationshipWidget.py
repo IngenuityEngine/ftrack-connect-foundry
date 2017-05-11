@@ -1,4 +1,4 @@
-from ...ui.toolkit import QtCore, QtGui
+from ...ui.toolkit import QtCore, QtGui, QtWidgets
 from ...ui import constants
 
 from .BaseWidget import BaseWidget

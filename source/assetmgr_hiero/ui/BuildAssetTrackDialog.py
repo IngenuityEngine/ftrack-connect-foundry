@@ -1,4 +1,4 @@
-from PySide import QtGui
+from QtExt import QtGui, QtWidgets, QtCore
 
 import FnAssetAPI
 from FnAssetAPI import specifications
@@ -10,7 +10,7 @@ from FnAssetAPI.ui.constants import kWorkflowRelationshipWidgetId
 ## @todo Unify how the dialogs work - some use explicit accessors, some use
 ## options dicts
 
-class BuildAssetTrackDialog(QtGui.QDialog):
+class BuildAssetTrackDialog(QtWidgets.QDialog):
   """
 
   This dialog is to hold a UI, supplied by the manager, to get a set of
@@ -44,7 +44,7 @@ class BuildAssetTrackDialog(QtGui.QDialog):
     self.__lastIgnoreClips = None
     self.__lastParentRef = None
 
-    layout = QtGui.QVBoxLayout()
+    layout = QtWidgets.QVBoxLayout()
     self.setLayout(layout)
 
      # Asset Manager Widget
@@ -58,19 +58,19 @@ class BuildAssetTrackDialog(QtGui.QDialog):
 
     # Options
 
-    optionsBox = QtGui.QGroupBox("Options")
-    optionsLayout = QtGui.QVBoxLayout()
+    optionsBox = QtWidgets.QGroupBox("Options")
+    optionsLayout = QtWidgets.QVBoxLayout()
     optionsBox.setLayout(optionsLayout)
     layout.addWidget(optionsBox)
 
-    self.__trackName = QtGui.QLineEdit()
-    trackNameLayout = QtGui.QHBoxLayout()
-    trackNameLayout.addWidget(QtGui.QLabel("Track Name"))
+    self.__trackName = QtWidgets.QLineEdit()
+    trackNameLayout = QtWidgets.QHBoxLayout()
+    trackNameLayout.addWidget(QtWidgets.QLabel("Track Name"))
     trackNameLayout.addWidget(self.__trackName)
     optionsLayout.addLayout(trackNameLayout)
 
-    self.__useClipsRadio = QtGui.QRadioButton("Match by Clip")
-    self.__useShotsRadio = QtGui.QRadioButton("Match by Shot")
+    self.__useClipsRadio = QtWidgets.QRadioButton("Match by Clip")
+    self.__useShotsRadio = QtWidgets.QRadioButton("Match by Shot")
     optionsLayout.addWidget(self.__useClipsRadio)
     optionsLayout.addWidget(self.__useShotsRadio)
 
@@ -88,9 +88,9 @@ class BuildAssetTrackDialog(QtGui.QDialog):
 
     ## @todo disable the ok button if using shots and no valid entity ref
 
-    self.__buttons = QtGui.QDialogButtonBox(QtGui.QDialogButtonBox.Ok
-        | QtGui.QDialogButtonBox.Cancel)
-    self.__buttons.button(QtGui.QDialogButtonBox.Ok).setText('Build')
+    self.__buttons = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok
+        | QtWidgets.QDialogButtonBox.Cancel)
+    self.__buttons.button(QtWidgets.QDialogButtonBox.Ok).setText('Build')
     layout.addWidget(self.__buttons)
 
     # Connections
@@ -212,7 +212,7 @@ class BuildAssetTrackDialog(QtGui.QDialog):
       buttonEnabled = bool(ref)
 
     self.__shotParentPicker.setVisible(pickerVisiblity)
-    self.__buttons.button(QtGui.QDialogButtonBox.Ok).setEnabled(buttonEnabled)
+    self.__buttons.button(QtWidgets.QDialogButtonBox.Ok).setEnabled(buttonEnabled)
 
     self._analyze()
     self.__syncUI()
@@ -222,7 +222,7 @@ class BuildAssetTrackDialog(QtGui.QDialog):
 
     if self.__ignoreClips:
       ref = self.__shotParentPicker.getSelectionSingle()
-      self.__buttons.button(QtGui.QDialogButtonBox.Ok).setEnabled(bool(ref))
+      self.__buttons.button(QtWidgets.QDialogButtonBox.Ok).setEnabled(bool(ref))
 
       self._analyze()
       self.__syncUI()

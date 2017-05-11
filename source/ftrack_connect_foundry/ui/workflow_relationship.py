@@ -1,7 +1,7 @@
 # :coding: utf-8
 # :copyright: Copyright (c) 2014 ftrack
 
-from FnAssetAPI.ui.toolkit import QtGui, QtCore
+from FnAssetAPI.ui.toolkit import QtGui, QtCore, QtWidgets
 import FnAssetAPI
 import FnAssetAPI.ui.widgets
 
@@ -16,7 +16,7 @@ class WorkflowRelationship(
         self._bridge = bridge
         super(WorkflowRelationship, self).__init__(context, parent)
 
-        self._layout = QtGui.QHBoxLayout()
+        self._layout = QtWidgets.QHBoxLayout()
         self.setLayout(self._layout)
 
         self.workflowWidget = _WorkflowRelationshipWidget(self)
@@ -27,10 +27,10 @@ class WorkflowRelationship(
         return self.workflowWidget.getCriteria()
 
 
-class _WorkflowRelationshipWidget(QtGui.QWidget):
+class _WorkflowRelationshipWidget(QtWidgets.QWidget):
 
     def __init__(self, parent):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_WorkflowRelationship()
         self.ui.setupUi(self)
 
@@ -74,32 +74,32 @@ class Ui_WorkflowRelationship(object):
         '''Set up ui for *WorkflowRelationship* widget.'''
         WorkflowRelationship.setObjectName('WorkflowRelationship')
         WorkflowRelationship.resize(275, 106)
-        self.verticalLayout = QtGui.QVBoxLayout(WorkflowRelationship)
+        self.verticalLayout = QtWidgets.QVBoxLayout(WorkflowRelationship)
         self.verticalLayout.setObjectName('verticalLayout')
-        self.gridLayout = QtGui.QGridLayout()
+        self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName('gridLayout')
-        spacerItem = QtGui.QSpacerItem(
-            20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding
         )
         self.gridLayout.addItem(spacerItem, 2, 0, 1, 1)
-        self.label = QtGui.QLabel(WorkflowRelationship)
+        self.label = QtWidgets.QLabel(WorkflowRelationship)
         self.label.setObjectName('label')
         self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
-        self.taskCombo = QtGui.QComboBox(WorkflowRelationship)
+        self.taskCombo = QtWidgets.QComboBox(WorkflowRelationship)
         self.taskCombo.setObjectName('taskCombo')
         self.gridLayout.addWidget(self.taskCombo, 1, 1, 1, 1)
-        self.versionCombo = QtGui.QComboBox(WorkflowRelationship)
+        self.versionCombo = QtWidgets.QComboBox(WorkflowRelationship)
         self.versionCombo.setObjectName('versionCombo')
         self.gridLayout.addWidget(self.versionCombo, 0, 1, 1, 1)
-        self.label_2 = QtGui.QLabel(WorkflowRelationship)
+        self.label_2 = QtWidgets.QLabel(WorkflowRelationship)
         self.label_2.setObjectName('label_2')
         self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
-        self.preferNukeScript = QtGui.QCheckBox(
+        self.preferNukeScript = QtWidgets.QCheckBox(
             'Prefer nuke script', WorkflowRelationship
         )
         self.gridLayout.addWidget(self.preferNukeScript, 2, 0, 1, 2)
-        spacerItem1 = QtGui.QSpacerItem(
-            40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum
         )
         self.gridLayout.addItem(spacerItem1, 0, 3, 1, 1)
 
@@ -109,7 +109,7 @@ class Ui_WorkflowRelationship(object):
         QtCore.QMetaObject.connectSlotsByName(WorkflowRelationship)
 
     def retranslateUi(self, WorkflowRelationship):
-        WorkflowRelationship.setWindowTitle(QtGui.QApplication.translate("WorkflowRelationship", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("WorkflowRelationship", "Task:", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_2.setText(QtGui.QApplication.translate("WorkflowRelationship", "Version:", None, QtGui.QApplication.UnicodeUTF8))
+        WorkflowRelationship.setWindowTitle(QtWidgets.QApplication.translate("WorkflowRelationship", "Form", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.label.setText(QtWidgets.QApplication.translate("WorkflowRelationship", "Task:", None, QtWidgets.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtWidgets.QApplication.translate("WorkflowRelationship", "Version:", None, QtWidgets.QApplication.UnicodeUTF8))
 

@@ -8,7 +8,7 @@ import traceback
 import functools
 import getpass
 
-from FnAssetAPI.ui.toolkit import QtCore, QtGui
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWidgets
 import FnAssetAPI.ui.widgets
 import FnAssetAPI.ui.dialogs
 import FnAssetAPI.specifications
@@ -93,29 +93,29 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
 
     def _build(self):
         '''Build and layout widget.'''
-        layout = QtGui.QVBoxLayout()
+        layout = QtWidgets.QVBoxLayout()
         self.setLayout(layout)
 
         # Header
         header = ftrack_connect.ui.widget.header.Header(getpass.getuser(), self)
         header.setSizePolicy(
-            QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Fixed
         )
         layout.addWidget(header)
 
-        secondaryHeader = QtGui.QFrame()
-        headerLayout = QtGui.QHBoxLayout()
+        secondaryHeader = QtWidgets.QFrame()
+        headerLayout = QtWidgets.QHBoxLayout()
         headerLayout.setContentsMargins(0, 0, 0, 0)
         secondaryHeader.setLayout(headerLayout)
         layout.addWidget(secondaryHeader)
 
-        self._createButton = QtGui.QToolButton()
+        self._createButton = QtWidgets.QToolButton()
         self._createButton.setIcon(
             QtGui.QIcon.fromTheme('plus', QtGui.QIcon(':icon-plus'))
         )
         headerLayout.addWidget(self._createButton)
 
-        self._navigateUpButton = QtGui.QToolButton()
+        self._navigateUpButton = QtWidgets.QToolButton()
         self._navigateUpButton.setIcon(
             QtGui.QIcon.fromTheme('go-up', QtGui.QIcon(':icon-arrow-up'))
         )
@@ -124,12 +124,12 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         headerLayout.addStretch(1)
 
         # Bookmarks
-        contentSplitter = QtGui.QSplitter()
+        contentSplitter = QtWidgets.QSplitter()
         layout.addWidget(contentSplitter)
 
-        self._bookmarksView = QtGui.QTableWidget()
+        self._bookmarksView = QtWidgets.QTableWidget()
         self._bookmarksView.setEditTriggers(
-            QtGui.QAbstractItemView.NoEditTriggers
+            QtWidgets.QAbstractItemView.NoEditTriggers
         )
         self._bookmarksView.setGridStyle(QtCore.Qt.NoPen)
         self._bookmarksView.setColumnCount(1)
@@ -142,8 +142,8 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         contentSplitter.addWidget(self._bookmarksView)
 
         # Navigation
-        self._navigator = QtGui.QTableWidget()
-        self._navigator.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self._navigator = QtWidgets.QTableWidget()
+        self._navigator.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self._navigator.setGridStyle(QtCore.Qt.NoPen)
         self._navigator.setColumnCount(1)
         self._navigator.horizontalHeader().setStretchLastSection(True)
@@ -151,9 +151,9 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         self._navigator.setHorizontalHeaderLabels(['Name'])
         contentSplitter.addWidget(self._navigator)
 
-        self._versionsNavigator = QtGui.QTableWidget()
+        self._versionsNavigator = QtWidgets.QTableWidget()
         self._versionsNavigator.setEditTriggers(
-            QtGui.QAbstractItemView.NoEditTriggers
+            QtWidgets.QAbstractItemView.NoEditTriggers
         )
         self._versionsNavigator.setGridStyle(QtCore.Qt.NoPen)
         self._versionsNavigator.setColumnCount(1)
@@ -162,9 +162,9 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         self._versionsNavigator.setHorizontalHeaderLabels(['Version'])
         contentSplitter.addWidget(self._versionsNavigator)
 
-        self._componentsNavigator = QtGui.QTableWidget()
+        self._componentsNavigator = QtWidgets.QTableWidget()
         self._componentsNavigator.setEditTriggers(
-            QtGui.QAbstractItemView.NoEditTriggers
+            QtWidgets.QAbstractItemView.NoEditTriggers
         )
         self._componentsNavigator.setColumnCount(1)
         self._componentsNavigator.horizontalHeader().setStretchLastSection(True)
@@ -180,21 +180,21 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         contentSplitter.addWidget(self._detailView)
 
         # Location
-        self._locationField = QtGui.QLineEdit()
+        self._locationField = QtWidgets.QLineEdit()
         layout.addWidget(self._locationField)
 
-        self._locationOptions = QtGui.QFrame()
+        self._locationOptions = QtWidgets.QFrame()
         layout.addWidget(self._locationOptions)
 
-        locationOptionsLayout = QtGui.QHBoxLayout()
+        locationOptionsLayout = QtWidgets.QHBoxLayout()
         locationOptionsLayout.setContentsMargins(0, 0, 0, 0)
         self._locationOptions.setLayout(locationOptionsLayout)
 
-        self._assetNameField = QtGui.QLineEdit()
+        self._assetNameField = QtWidgets.QLineEdit()
         self._assetNameField.setEnabled(False)
         locationOptionsLayout.addWidget(self._assetNameField)
 
-        self._overrideNameHintOption = QtGui.QCheckBox('Specify Asset Name')
+        self._overrideNameHintOption = QtWidgets.QCheckBox('Specify Asset Name')
         locationOptionsLayout.addWidget(self._overrideNameHintOption)
 
     def _postBuild(self):
@@ -459,7 +459,7 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
         projects = sorted(projects, key=lambda project: project.getName())
 
         for index, project in enumerate(projects):
-            item = QtGui.QTableWidgetItem(project.getName())
+            item = QtWidgets.QTableWidgetItem(project.getName())
             item.setData(
                 QtCore.Qt.UserRole,
                 project.getEntityRef()
@@ -645,7 +645,7 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
             if entityType == 'Sequence' and self._shotsEnabled == False:
                 makeDisabled = True
 
-            item = QtGui.QTableWidgetItem(text)
+            item = QtWidgets.QTableWidgetItem(text)
             item.setData(QtCore.Qt.UserRole, entity.getEntityRef())
 
             icon = self._getIcon(entity)
@@ -683,7 +683,7 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
 
         for index, version in enumerate(reversed(versions)):
             text = self._bridge.getEntityName(version.getEntityRef())
-            item = QtGui.QTableWidgetItem(text)
+            item = QtWidgets.QTableWidgetItem(text)
             item.setData(QtCore.Qt.UserRole, version.getEntityRef())
             self._versionsNavigator.setItem(index, 0, item)
 
@@ -699,7 +699,7 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
             text = self._bridge.getEntityName(
                 component.getEntityRef()
             )
-            item = QtGui.QTableWidgetItem(text)
+            item = QtWidgets.QTableWidgetItem(text)
             item.setData(
                 QtCore.Qt.UserRole,
                 component.getEntityRef()
@@ -832,7 +832,7 @@ class Browser(FnAssetAPI.ui.widgets.BrowserWidget):
             self._updateNavigator(entity.getEntityRef())
 
 
-class CreateDialog(QtGui.QDialog):
+class CreateDialog(QtWidgets.QDialog):
     '''Display options for creating new entities.'''
 
     def __init__(self, bridge, parent=None, currentHref=None):
@@ -846,7 +846,7 @@ class CreateDialog(QtGui.QDialog):
         self._currentHref = currentHref
         self.currentHref = None
 
-        QtGui.QDialog.__init__(self, parent)
+        QtWidgets.QDialog.__init__(self, parent)
 
         if not self._currentHref:
             self.reject()
@@ -856,46 +856,46 @@ class CreateDialog(QtGui.QDialog):
 
     def _build(self):
         '''Build and layout widget.'''
-        layout = QtGui.QVBoxLayout()
+        layout = QtWidgets.QVBoxLayout()
         layout.setSpacing(2)
         layout.setContentsMargins(6, 6, 6, 6)
         self.setLayout(layout)
 
-        formLayout = QtGui.QGridLayout()
+        formLayout = QtWidgets.QGridLayout()
         layout.addLayout(formLayout)
 
-        self._nameLabel = QtGui.QLabel('Name')
+        self._nameLabel = QtWidgets.QLabel('Name')
         formLayout.addWidget(self._nameLabel, 2, 0, 1, 1)
 
-        self._nameInput = QtGui.QLineEdit()
+        self._nameInput = QtWidgets.QLineEdit()
         formLayout.addWidget(self._nameInput, 2, 1, 1, 1)
 
-        self._typeLabel = QtGui.QLabel('Type')
+        self._typeLabel = QtWidgets.QLabel('Type')
         self._typeLabel.setEnabled(True)
         formLayout.addWidget(self._typeLabel, 1, 0, 1, 1)
 
-        self._typeSelector = QtGui.QComboBox()
+        self._typeSelector = QtWidgets.QComboBox()
         self._typeSelector.setEnabled(True)
         formLayout.addWidget(self._typeSelector, 1, 1, 1, 1)
 
-        self._objectLabel = QtGui.QLabel('Object')
+        self._objectLabel = QtWidgets.QLabel('Object')
         formLayout.addWidget(self._objectLabel, 0, 0, 1, 1)
 
-        self._objectSelector = QtGui.QComboBox()
+        self._objectSelector = QtWidgets.QComboBox()
         formLayout.addWidget(self._objectSelector, 0, 1, 1, 1)
 
-        controlsLayout = QtGui.QHBoxLayout()
+        controlsLayout = QtWidgets.QHBoxLayout()
         layout.addLayout(controlsLayout)
 
-        spacerItem = QtGui.QSpacerItem(
-            10, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum
+        spacerItem = QtWidgets.QSpacerItem(
+            10, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
         )
         controlsLayout.addItem(spacerItem)
 
-        self._cancelButton = QtGui.QPushButton('Cancel')
+        self._cancelButton = QtWidgets.QPushButton('Cancel')
         controlsLayout.addWidget(self._cancelButton)
 
-        self._createButton = QtGui.QPushButton('Create')
+        self._createButton = QtWidgets.QPushButton('Create')
         self._createButton.setAutoDefault(True)
         self._createButton.setDefault(True)
         controlsLayout.addWidget(self._createButton)
