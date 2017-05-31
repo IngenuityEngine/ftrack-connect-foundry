@@ -81,9 +81,9 @@ class QtHost(Host):
     title.capitalize()
 
     handlers = {
-      logging.kCritical : QtGui.QMessageBox.critical,
-      logging.kError: QtGui.QMessageBox.critical,
-      logging.kWarning : QtGui.QMessageBox.warning
+      logging.kCritical : QtWidgets.QMessageBox.critical,
+      logging.kError: QtWidgets.QMessageBox.critical,
+      logging.kWarning : QtWidgets.QMessageBox.warning
     }
 
     box = handlers.get(severity, QtWidgets.QMessageBox.information)
