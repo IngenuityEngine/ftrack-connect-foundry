@@ -10,6 +10,11 @@ Release notes
 
 .. release:: next
 
+    .. change:: fixed
+        :tags: API
+
+        Nuke 11 not supported.
+ 
     .. change:: new
         :tags: Build track, User interface
 
