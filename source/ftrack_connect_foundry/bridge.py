@@ -118,6 +118,8 @@ class Bridge(object):
         entity = self.getEntityById(entityRef)
         resolved = None
 
+        session = ftrack_connect.session.get_shared_session()
+
         if isinstance(entity, ftrack.Component):
             # Prevent writing to asset.
             # TODO: Reconsider this when locations is merged.
@@ -126,7 +128,15 @@ class Bridge(object):
                     'Cannot overwrite an existing asset.', entityRef
                 )
 
-            importPath = entity.getImportPath()
+            component = session.get(
+                'Component', entity.getId()
+            )
+
+            location = session.pick_location(
+                component
+            )
+
+            importPath = location.get_filesystem_path(component)
             resolved = self._conformPath(importPath)
 
         else:
