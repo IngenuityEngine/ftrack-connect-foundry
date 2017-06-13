@@ -9,6 +9,10 @@ Release notes
 *************
 
 .. release:: next
+    .. change:: change
+        :tags: API
+
+        Asset versions are now published through the `ftrack-python-api`.
 
     .. change:: new
         :tags: Build track, User interface
