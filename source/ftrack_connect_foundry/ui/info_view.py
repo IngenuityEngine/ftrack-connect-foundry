@@ -4,7 +4,6 @@
 import os
 import traceback
 
-from FnAssetAPI.ui.toolkit import QtCore
 import FnAssetAPI.logging
 import FnAssetAPI.exceptions
 import FnAssetAPI.ui.widgets
