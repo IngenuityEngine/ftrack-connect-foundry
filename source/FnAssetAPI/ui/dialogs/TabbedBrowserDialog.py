@@ -4,7 +4,7 @@ import types
 from ... import logging
 from ...SessionManager import SessionManager
 
-from ..toolkit import QtGui
+from ..toolkit import QtGui, QtWidgets
 from ..constants import kBrowserWidgetId, kBrowserWidgetName
 
 from ...core.decorators import debugApiCall
@@ -14,7 +14,7 @@ from ...audit import auditApiCall
 __all__ = ['TabbedBrowserDialog']
 
 
-class TabbedBrowserDialog(QtGui.QDialog):
+class TabbedBrowserDialog(QtWidgets.QDialog):
   """
 
   Provides a Dialog box with accept/cancel buttons and a tab layout to hold one
@@ -36,7 +36,7 @@ class TabbedBrowserDialog(QtGui.QDialog):
     the UI is properly configured.
 
     """
-    QtGui.QDialog.__init__(self, parent=parent)
+    QtWidgets.QDialog.__init__(self, parent=parent)
 
     logging.log("TabbedBrowserDialog(%r, %r)" % (specification,
         context), logging.kDebugAPI)
@@ -44,19 +44,19 @@ class TabbedBrowserDialog(QtGui.QDialog):
     self._specification = specification
     self._context = context
 
-    layout = QtGui.QVBoxLayout(self)
+    layout = QtWidgets.QVBoxLayout(self)
 
-    self.__tabWidget = QtGui.QTabWidget(self)
+    self.__tabWidget = QtWidgets.QTabWidget(self)
     self.__tabWidget.currentChanged.connect(self.__tabChanged)
     layout.addWidget(self.__tabWidget)
 
-    self.__optionsBox = QtGui.QFrame(self)
-    QtGui.QHBoxLayout(self.__optionsBox)
+    self.__optionsBox = QtWidgets.QFrame(self)
+    QtWidgets.QHBoxLayout(self.__optionsBox)
     layout.addWidget(self.__optionsBox)
 
-    self.__buttons = QtGui.QDialogButtonBox(QtGui.QDialogButtonBox.Ok
-        | QtGui.QDialogButtonBox.Cancel)
-    self.__buttons.button(QtGui.QDialogButtonBox.Ok).setText('Accept')
+    self.__buttons = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok
+        | QtWidgets.QDialogButtonBox.Cancel)
+    self.__buttons.button(QtWidgets.QDialogButtonBox.Ok).setText('Accept')
     layout.addWidget(self.__buttons)
 
     self.__buttons.accepted.connect(self.accept)
@@ -147,7 +147,7 @@ class TabbedBrowserDialog(QtGui.QDialog):
     Sets the enabled state of the 'Accept' button in the dialog.
 
     """
-    self.__buttons.button(QtGui.QDialogButtonBox.Ok).setEnabled(enabled)
+    self.__buttons.button(QtWidgets.QDialogButtonBox.Ok).setEnabled(enabled)
 
   def setAcceptButtonTitle(self, title):
     """
@@ -155,7 +155,7 @@ class TabbedBrowserDialog(QtGui.QDialog):
     Sets the title for the 'Accept' button in the dialog.
 
     """
-    self.__buttons.button(QtGui.QDialogButtonBox.Ok).setText(title)
+    self.__buttons.button(QtWidgets.QDialogButtonBox.Ok).setText(title)
 
 
   def getCurrentTabIndex(self):

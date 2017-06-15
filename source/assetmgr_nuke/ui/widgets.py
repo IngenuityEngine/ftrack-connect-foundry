@@ -1,8 +1,7 @@
-from QtExt import QtCore, QtGui, QtWidgets
-
 from .. import session
 
 from FnAssetAPI.ui.widgets import SessionSettingsWidget
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWidgets
 
 
 class AssetPreferencesDialog(QtWidgets.QDialog):

@@ -1,4 +1,4 @@
-from QtExt import QtGui, QtWidgets
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWidgets
 
 import FnAssetAPI
 
