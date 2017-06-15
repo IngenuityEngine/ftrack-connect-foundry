@@ -30,7 +30,7 @@ from buildAssetTrackActions import BuildAssetTrackAction, RefreshAssetTrackActio
 ## @todo UNDO grouping
 
 
-class AssetPreferencesAction(QtGui.QAction):
+class AssetPreferencesAction(QtWidgets.QAction):
 
   def __init__(self, name="Preferences...", parent=None):
     super(AssetPreferencesAction, self).__init__(name, parent)
@@ -311,7 +311,7 @@ class PublishShotsClipsAction(TrackItemBasedAction):
 
 
 
-class StartAuditAction(QtGui.QAction):
+class StartAuditAction(QtWidgets.QAction):
 
   def __init__(self, parent=None):
     super(StartAuditAction, self).__init__("Restart", parent)
@@ -323,7 +323,7 @@ class StartAuditAction(QtGui.QAction):
 
 
 
-class StopAuditAction(QtGui.QAction):
+class StopAuditAction(QtWidgets.QAction):
 
   def __init__(self, parent=None):
     super(StopAuditAction, self).__init__("Stop", parent)
@@ -334,7 +334,7 @@ class StopAuditAction(QtGui.QAction):
     print FnAssetAPI.audit.auditor().sprintCoverage()
 
 
-class PrintAuditAction(QtGui.QAction):
+class PrintAuditAction(QtWidgets.QAction):
 
   def __init__(self, parent=None):
     super(PrintAuditAction, self).__init__("Print", parent)

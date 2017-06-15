@@ -12,7 +12,7 @@ from . import utils
 
 import nuke
 
-from QtExt import QtGui, QtWidgets
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWidgets
 
 
 def showPrefs():
