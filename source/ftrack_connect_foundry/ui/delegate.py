@@ -35,11 +35,9 @@ class Delegate(FnAssetAPI.ui.implementation.ManagerUIDelegate):
         self._widgetMapping = {}
         for widgetClass in (
 
-            # TODO: RE ENABLE ONCE QtWebKitWidgets IS AVAILABLE
-
-            # ftrack_connect_foundry.ui.info_view.InfoView,
-            # ftrack_connect_foundry.ui.tasks_view.TasksView,
-            # ftrack_connect_foundry.ui.info_view.WorkingTaskInfoView,
+            ftrack_connect_foundry.ui.info_view.InfoView,
+            ftrack_connect_foundry.ui.tasks_view.TasksView,
+            ftrack_connect_foundry.ui.info_view.WorkingTaskInfoView,
             ftrack_connect_foundry.ui.browser.Browser,
             ftrack_connect_foundry.ui.inline_picker.InlinePicker,
             ftrack_connect_foundry.ui.workflow_relationship.WorkflowRelationship,
