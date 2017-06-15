@@ -12,6 +12,7 @@ import FnAssetAPI.exceptions
 import FnAssetAPI.logging
 import ftrack
 
+import ftrack_connect.session
 import ftrack_connect_foundry.event
 import ftrack_connect_foundry.proxy
 import ftrack_connect_foundry.constant
@@ -117,6 +118,8 @@ class Bridge(object):
         entity = self.getEntityById(entityRef)
         resolved = None
 
+        session = ftrack_connect.session.get_shared_session()
+
         if isinstance(entity, ftrack.Component):
             # Prevent writing to asset.
             # TODO: Reconsider this when locations is merged.
@@ -125,7 +128,15 @@ class Bridge(object):
                     'Cannot overwrite an existing asset.', entityRef
                 )
 
-            importPath = entity.getImportPath()
+            component = session.get(
+                'Component', entity.getId()
+            )
+
+            location = session.pick_location(
+                component
+            )
+
+            importPath = location.get_filesystem_path(component)
             resolved = self._conformPath(importPath)
 
         else:
@@ -938,17 +949,29 @@ class Bridge(object):
                 .format(entity),
                 targetReference
             )
+        session = ftrack_connect.session.get_shared_session()
 
-        version = asset.createVersion(comment='', taskid=taskId)
+        version = session.create('AssetVersion', {
+            'asset_id':asset.getId(),
+            'task_id': taskId
+        })
+
+        session.commit()
 
         thumbnailPath = specification.getField('thumbnailPath', None)
         if thumbnailPath:
-            version.createThumbnail(thumbnailPath)
+            version.create_thumbnail(
+                thumbnailPath
+            )
 
-        mainComponent = version.createComponent(file=path, name=component)
+        location = session.pick_location()
+
+        mainComponent = version.create_component(
+            path, data={'name': component}, location=location
+        )
 
         if assetType == 'img':
-            mainComponent.setMeta('img_main', 'True')
+            mainComponent['metadata']['img_main'] = True
 
         # Make readOnly so that it cannot be overwritten by anyone else.
         if readOnly and os.path.isfile(path):
@@ -956,12 +979,14 @@ class Bridge(object):
             # for now to stop accidents.
             ftrack_connect_foundry.locker.lockFile(path)
 
-        # Publish the assetVersion.
-        version.publish()
 
         # Return a reference to the main component as it is a unique address
         # when an asset contains multiple components.
-        return mainComponent.getEntityRef()
+        return (
+            'ftrack://{0}?entityType=component'.format(
+                mainComponent.get('id')
+            )
+        )
 
     def _getTaskId(self, entity, specification, context):
         '''Return task reference for *entity*.'''
