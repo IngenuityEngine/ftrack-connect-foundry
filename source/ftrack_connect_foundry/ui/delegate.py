@@ -25,7 +25,7 @@ except ImportError:
     host_version = hiero.core.env.get('VersionMajor')
 
 
-FnAssetAPI.logging.info('Host Version: %s' % host_version) 
+FnAssetAPI.logging.info('Host Version: %s' % host_version)
 
 
 class Delegate(FnAssetAPI.ui.implementation.ManagerUIDelegate):
@@ -44,6 +44,7 @@ class Delegate(FnAssetAPI.ui.implementation.ManagerUIDelegate):
         # to provide them access to common functionality whilst maintaining
         # compatibility with their parent class interfaces.
 
+        import ftrack_connect_foundry
         compatible_widgets = [
             ftrack_connect_foundry.ui.browser.Browser,
             ftrack_connect_foundry.ui.inline_picker.InlinePicker,
