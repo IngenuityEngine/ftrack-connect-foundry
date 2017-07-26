@@ -12,20 +12,8 @@ import ftrack_connect_foundry.ui.inline_picker
 import ftrack_connect_foundry.ui.workflow_relationship
 import ftrack_connect_foundry.ui.registration_options
 
-
-host_version = None
-# TODO: To be removed once N11 support is full.
-# We do not know yet where we are running from , so let's try all.
-
-try:
-    import nuke
-    host_version = nuke.env.get('NukeVersionMajor')
-except ImportError:
-    import hiero
-    host_version = hiero.core.env.get('VersionMajor')
-
-
-FnAssetAPI.logging.info('Host Version: %s' % host_version)
+from ftrack_connect.ui.widget import is_webwidget_supported
+has_webwidgets = is_webwidget_supported()
 
 
 class Delegate(FnAssetAPI.ui.implementation.ManagerUIDelegate):
@@ -52,16 +40,16 @@ class Delegate(FnAssetAPI.ui.implementation.ManagerUIDelegate):
             ftrack_connect_foundry.ui.registration_options.RegistrationOptions
         ]
 
-        if host_version and host_version <= 10:
+        if has_webwidgets:
             import ftrack_connect_foundry.ui.tasks_view
             import ftrack_connect_foundry.ui.info_view
 
-            uncompatible_widgets = [
+            incompatible_widgets = [
                 ftrack_connect_foundry.ui.info_view.InfoView,
                 ftrack_connect_foundry.ui.info_view.WorkingTaskInfoView,
                 ftrack_connect_foundry.ui.tasks_view.TasksView,
             ]
-            all_widgets = compatible_widgets + uncompatible_widgets
+            all_widgets = compatible_widgets + incompatible_widgets
         else:
             all_widgets = compatible_widgets
 
