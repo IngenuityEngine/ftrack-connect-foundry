@@ -12,7 +12,7 @@ import ftrack_connect_foundry.ui.inline_picker
 import ftrack_connect_foundry.ui.workflow_relationship
 import ftrack_connect_foundry.ui.registration_options
 
-from ftrack_connect.ui.widget import is_webwidget_supported
+from FnAssetAPI.ui.toolkit import is_webwidget_supported
 has_webwidgets = is_webwidget_supported()
 
 

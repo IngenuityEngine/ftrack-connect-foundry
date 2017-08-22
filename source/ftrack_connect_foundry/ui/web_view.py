@@ -1,16 +1,7 @@
 # :coding: utf-8
 # :copyright: Copyright (c) 2014 ftrack
 
-from FnAssetAPI.ui.toolkit import QtCore, QtGui
-try:
-    from FnAssetAPI.ui.toolkit import QtWebKitWidgets as QtWebWidgets
-    HAS_WEBKIT=True
-except ImportError:
-    from FnAssetAPI.ui.toolkit import QtWebEngineWidgets as QtWebWidgets
-    HAS_WEBKIT=False
-    # Create some aliases for old QtWebKit classes.
-    QtWebWidgets.QWebView = QtWebWidgets.QWebEngineView
-
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWebCompat
 import FnAssetAPI.ui.widgets
 import FnAssetAPI.ui.widgets.attributes
 
@@ -51,7 +42,7 @@ class WebView(FnAssetAPI.ui.widgets.BaseWidget):
         layout.setSpacing(0)
         self.setLayout(layout)
 
-        self._webView = QtWebWidgets.QWebView()
+        self._webView = QtWebCompat.QWebView()
         layout.addWidget(self._webView)
 
     def _postBuild(self):
@@ -72,10 +63,7 @@ class WebView(FnAssetAPI.ui.widgets.BaseWidget):
         return url
 
     def evaluateJavascript(self, javascript):
-        if HAS_WEBKIT:
-            self._webView.page().mainFrame().evaluateJavaScript(javascript)
-        else:
-            self._webView.page().evaluateJavaScript(javascript)
+        self._webView.evaluateJavaScript(javascript)
 
     @classmethod
     def getAttributes(cls):
