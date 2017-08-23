@@ -42,7 +42,7 @@ class WebView(FnAssetAPI.ui.widgets.BaseWidget):
         layout.setSpacing(0)
         self.setLayout(layout)
 
-        self._webView = QtWebCompat.QWebView()
+        self._webView = QtWebCompat.QtWebView()
         layout.addWidget(self._webView)
 
     def _postBuild(self):
