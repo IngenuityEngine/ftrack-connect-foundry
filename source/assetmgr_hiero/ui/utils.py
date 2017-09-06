@@ -1,4 +1,4 @@
-from PySide import QtGui
+from QtExt import QtGui, QtWidgets
 
 import FnAssetAPI
 
@@ -16,7 +16,7 @@ def findNamedSubMenu(name, menu):
   # when the action python representation gets deleted too soon.
 
   namedMenu = None
-  for c in menu.findChildren(QtGui.QMenu):
+  for c in menu.findChildren(QtWidgets.QMenu):
     if c.title() == name:
       namedMenu = c
       break

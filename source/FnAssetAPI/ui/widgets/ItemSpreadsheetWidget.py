@@ -1,11 +1,11 @@
 import os
-from ...ui.toolkit import QtGui
+from ...ui.toolkit import QtGui, QtWidgets
 
 
 __all__ = ['ItemSpreadsheetWidget', 'ItemTreeWidgetItem']
 
 
-class ItemSpreadsheetWidget(QtGui.QTreeWidget):
+class ItemSpreadsheetWidget(QtWidgets.QTreeWidget):
   """
 
   This class provides a Tree widget, that displays the properties of a number
@@ -307,7 +307,7 @@ class ItemSpreadsheetWidget(QtGui.QTreeWidget):
 
 
 
-class ClassGroupTreeWidgetItem(QtGui.QTreeWidgetItem):
+class ClassGroupTreeWidgetItem(QtWidgets.QTreeWidgetItem):
 
   def __init__(self, cls):
     super(ClassGroupTreeWidgetItem, self).__init__()
@@ -315,7 +315,7 @@ class ClassGroupTreeWidgetItem(QtGui.QTreeWidgetItem):
 
 
 
-class ItemTreeWidgetItem(QtGui.QTreeWidgetItem):
+class ItemTreeWidgetItem(QtWidgets.QTreeWidgetItem):
 
   def __init__(self, item, headerList, tidy=True):
     super(ItemTreeWidgetItem, self).__init__()

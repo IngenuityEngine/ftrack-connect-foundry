@@ -1,7 +1,7 @@
 import FnAssetAPI
 
 import hiero.core
-from PySide import QtGui
+from QtExt import QtGui, QtWidgets, QtCore
 
 from .. import specifications
 from . import actions

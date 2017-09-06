@@ -1,7 +1,7 @@
 # :coding: utf-8
 # :copyright: Copyright (c) 2014 ftrack
 
-from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWebKit
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWebCompat
 import FnAssetAPI.ui.widgets
 import FnAssetAPI.ui.widgets.attributes
 
@@ -42,7 +42,7 @@ class WebView(FnAssetAPI.ui.widgets.BaseWidget):
         layout.setSpacing(0)
         self.setLayout(layout)
 
-        self._webView = QtWebKit.QWebView()
+        self._webView = QtWebCompat.QWebView()
         layout.addWidget(self._webView)
 
     def _postBuild(self):
@@ -61,6 +61,9 @@ class WebView(FnAssetAPI.ui.widgets.BaseWidget):
             return None
 
         return url
+
+    def evaluateJavascript(self, javascript):
+        self._webView.evaluateJavaScript(javascript)
 
     @classmethod
     def getAttributes(cls):

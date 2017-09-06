@@ -1,24 +1,23 @@
-from PySide import QtCore, QtGui
-
 from .. import session
 
 from FnAssetAPI.ui.widgets import SessionSettingsWidget
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWidgets
 
 
-class AssetPreferencesDialog(QtGui.QDialog):
+class AssetPreferencesDialog(QtWidgets.QDialog):
 
   def __init__(self):
     super(AssetPreferencesDialog, self).__init__()
 
     self.setWindowTitle("Asset Management Preferences")
 
-    layout = QtGui.QVBoxLayout()
+    layout = QtWidgets.QVBoxLayout()
     self.setLayout(layout)
 
     self.settingsWidget = SessionSettingsWidget()
     layout.addWidget(self.settingsWidget)
 
-    self.applyButton = QtGui.QPushButton("Apply")
+    self.applyButton = QtWidgets.QPushButton("Apply")
     layout.addWidget(self.applyButton)
     self.applyButton.clicked.connect(self.apply)
 

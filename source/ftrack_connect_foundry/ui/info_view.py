@@ -4,7 +4,6 @@
 import os
 import traceback
 
-from FnAssetAPI.ui.toolkit import QtCore
 import FnAssetAPI.logging
 import FnAssetAPI.exceptions
 import FnAssetAPI.ui.widgets
@@ -79,7 +78,7 @@ class InfoView(ftrack_connect_foundry.ui.web_view.WebView,
                 '}})'
                 .format(entityId, entityType)
             )
-            self._webView.page().mainFrame().evaluateJavaScript(javascript)
+            self.evaluateJavaScript(javascript)
 
 
 class WorkingTaskInfoView(InfoView):

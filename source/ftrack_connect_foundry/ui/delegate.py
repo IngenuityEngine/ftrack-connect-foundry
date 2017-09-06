@@ -7,12 +7,13 @@ import FnAssetAPI.ui.implementation
 import FnAssetAPI.ui.constants
 import FnAssetAPI.ui
 
-import ftrack_connect_foundry.ui.tasks_view
-import ftrack_connect_foundry.ui.info_view
 import ftrack_connect_foundry.ui.browser
 import ftrack_connect_foundry.ui.inline_picker
 import ftrack_connect_foundry.ui.workflow_relationship
 import ftrack_connect_foundry.ui.registration_options
+
+from FnAssetAPI.ui.toolkit import is_webwidget_supported
+has_webwidgets = is_webwidget_supported()
 
 
 class Delegate(FnAssetAPI.ui.implementation.ManagerUIDelegate):
@@ -30,16 +31,30 @@ class Delegate(FnAssetAPI.ui.implementation.ManagerUIDelegate):
         # Note: The widget classes are partialed with this delegate's bridge
         # to provide them access to common functionality whilst maintaining
         # compatibility with their parent class interfaces.
-        self._widgetMapping = {}
-        for widgetClass in (
-            ftrack_connect_foundry.ui.info_view.InfoView,
-            ftrack_connect_foundry.ui.info_view.WorkingTaskInfoView,
-            ftrack_connect_foundry.ui.tasks_view.TasksView,
+
+        import ftrack_connect_foundry
+        compatible_widgets = [
             ftrack_connect_foundry.ui.browser.Browser,
             ftrack_connect_foundry.ui.inline_picker.InlinePicker,
             ftrack_connect_foundry.ui.workflow_relationship.WorkflowRelationship,
             ftrack_connect_foundry.ui.registration_options.RegistrationOptions
-        ):
+        ]
+
+        if has_webwidgets:
+            import ftrack_connect_foundry.ui.tasks_view
+            import ftrack_connect_foundry.ui.info_view
+
+            incompatible_widgets = [
+                ftrack_connect_foundry.ui.info_view.InfoView,
+                ftrack_connect_foundry.ui.info_view.WorkingTaskInfoView,
+                ftrack_connect_foundry.ui.tasks_view.TasksView,
+            ]
+            all_widgets = compatible_widgets + incompatible_widgets
+        else:
+            all_widgets = compatible_widgets
+
+        self._widgetMapping = {}
+        for widgetClass in all_widgets:
             identifier = widgetClass.getIdentifier()
 
             # Bind bridge as first argument to class on instantiation.

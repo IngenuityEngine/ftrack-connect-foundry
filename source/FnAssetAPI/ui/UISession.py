@@ -149,7 +149,7 @@ class UISession(Session):
     added to the action, and the action will be marked as requiring an icon.
 
     """
-    from .toolkit import QtGui
+    from .toolkit import QtGui, QtWidgets
 
     if addIcon:
       action._usesManagerIcon = True
@@ -186,7 +186,7 @@ class UISession(Session):
       self._managerIconChecked = True
 
       import os
-      from .toolkit import QtCore, QtGui
+      from .toolkit import QtCore, QtGui, QtWidgets
 
       self._managerIcon = None
       self._managerSmallIcon = None

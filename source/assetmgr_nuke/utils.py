@@ -1,4 +1,4 @@
-from PySide import QtCore
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWidgets
 import FnAssetAPI
 import nuke
 

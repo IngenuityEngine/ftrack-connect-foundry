@@ -1,4 +1,4 @@
-from PySide import QtCore, QtGui
+from QtExt import QtGui, QtWidgets, QtCore
 import FnAssetAPI
 
 from .. import utils as cmdUtils

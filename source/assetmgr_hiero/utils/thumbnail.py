@@ -124,7 +124,7 @@ def processAndWriteThumbnailQImage(qImage, options):
 
   ## @todo This isn't a good method as it won't work in batch (when we have it)
 
-  from PySide import QtCore, QtGui
+  from QtExt import QtGui, QtWidgets, QtCore
 
   path = getTmpThumbnailPath(options)
 

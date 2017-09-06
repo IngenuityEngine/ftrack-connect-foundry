@@ -12,7 +12,7 @@ from . import utils
 
 import nuke
 
-from PySide import QtGui
+from FnAssetAPI.ui.toolkit import QtCore, QtGui, QtWidgets
 
 
 def showPrefs():
@@ -82,7 +82,7 @@ def _getScriptOpenOptions():
 
   l = FnAssetAPI.l
 
-  msgBox = QtGui.QMessageBox()
+  msgBox = QtWidgets.QMessageBox()
   msgBox.setText(l("{published} Scripts can't be opened directly."))
   msgBox.setInformativeText("This is to avoid changing the asset itself by "
       +"saving. Would you like to Save a Copy or import the nodes?")

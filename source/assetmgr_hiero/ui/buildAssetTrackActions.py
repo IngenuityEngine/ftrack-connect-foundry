@@ -4,7 +4,7 @@ import FnAssetAPI
 from FnAssetAPI.decorators import ensureManager
 from FnAssetAPI.contextManagers import ScopedProgressManager
 
-from PySide import QtGui
+from QtExt import QtGui, QtWidgets, QtCore
 
 import utils
 from BuildAssetTrackDialog import BuildAssetTrackDialog

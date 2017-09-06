@@ -27,6 +27,11 @@ Release notes
         for more information about the migration process please look at the main `ftrack-connect`
         `Documentation <http://ftrack-connect.rtd.ftrack.com/en/latest/release/migration.html>
 
+    .. change:: fixed
+        :tags: API
+
+        Nuke 11 not supported.
+ 
     .. change:: new
         :tags: Build track, User interface
 
