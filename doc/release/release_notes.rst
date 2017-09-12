@@ -8,6 +8,15 @@
 Release notes
 *************
 
+.. release:: 1.1.0
+    :date: 2017-09-12
+
+    .. change:: fixed
+        :tags: API
+
+        Nuke 11 not supported.
+
+
 .. release:: 1.0.0
     :date: 2017-07-07
 
@@ -27,10 +36,6 @@ Release notes
         for more information about the migration process please look at the main `ftrack-connect`
         `Documentation <http://ftrack-connect.rtd.ftrack.com/en/latest/release/migration.html>
 
-    .. change:: fixed
-        :tags: API
-
-        Nuke 11 not supported.
  
     .. change:: new
         :tags: Build track, User interface
